@@ -5,10 +5,10 @@ const APP_ID = functions.config().algolia.app;
 const ADMIN_KEY = functions.config().algolia.key;
 
 const client = algoliasearch(APP_ID, ADMIN_KEY);
-const index = client.initIndex('customers');
+const index = client.initIndex('PROJECT');
 
 
-exports.addToIndex = functions.firestore.document('customers/{customerId}')
+exports.addToIndex = functions.firestore.document('projects/{projectId}')
 
     .onCreate(snapshot => {
 
@@ -23,7 +23,7 @@ exports.addToIndex = functions.firestore.document('customers/{customerId}')
     });
 
 
-exports.updateIndex = functions.firestore.document('customers/{customerId}')
+exports.updateIndex = functions.firestore.document('projects/{projectId}')
 
     .onUpdate((change) => {
         const newData = change.after.data();
@@ -34,6 +34,6 @@ exports.updateIndex = functions.firestore.document('customers/{customerId}')
         });
     });
 
-exports.deleteFromIndex = functions.firestore.document('customers/{customerId}')
+exports.deleteFromIndex = functions.firestore.document('projects/{projectId}')
 
     .onDelete(snapshot => index.deleteObject(snapshot.id));
