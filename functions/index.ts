@@ -31,3 +31,16 @@ exports.updateIndex = functions.firestore.document('projects/{projectId}')
 exports.deleteFromIndex = functions.firestore.document('projects/{projectId}')
 
     .onDelete(snapshot => index.deleteObject(snapshot.id));
+
+
+exports.onProjectCreated = functions.firestore.document('projects/{projectId}').onCreate((snap, context) => {
+    // Get the note document
+    const project = snap.data();
+
+    // Add an 'objectID' field which Algolia requires
+    project.objectID = context.params.projectId;
+
+    // Write to the algolia index
+    const index = client.initIndex('projects');
+    return index.saveObject(project);
+});    
