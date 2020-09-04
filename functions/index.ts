@@ -6,7 +6,7 @@ const APP_ID = functions.config().algolia.app;
 const ADMIN_KEY = functions.config().algolia.key;
 
 const client = algoliasearch(APP_ID, ADMIN_KEY);
-const ALGOLIA_INDEX_NAME =  'projects';
+const ALGOLIA_INDEX_NAME =  'PROJECT';
 
 
 exports.onProjectCreated = functions.firestore.document('projects/{projectId}').onCreate((snap, context) => {
