@@ -9,12 +9,12 @@ const client = algoliasearch(APP_ID, ADMIN_KEY);
 const ALGOLIA_INDEX_NAME =  'PROJECT';
 
 
-exports.onProjectCreated = functions.firestore.document('projects/{projectId}').onCreate((snap, context) => {
+exports.onProjectCreated = functions.firestore.document('projects/{id}').onCreate((snap, context) => {
     // Get the note document
     const project = snap.data();
   
     // Add an 'objectID' field which Algolia requires
-    project.objectID = context.params.projectId;
+    project.objectID = context.params.id;
   
     // Write to the algolia index
     const index = client.initIndex(ALGOLIA_INDEX_NAME);
