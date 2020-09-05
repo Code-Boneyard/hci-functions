@@ -48,7 +48,7 @@ exports.onProjectCreated = functions.firestore.document('projects/{projectId}').
     project.objectID = context.params.projectId;
 
     // Write to the algolia PROJECT_INDEX
-    const PROJECT_INDEX = client.initIndex('projects');
+    const PROJECT_INDEX = client.initIndex('PROJECT');
     return PROJECT_INDEX.saveObject(project);
 });
 
@@ -89,7 +89,7 @@ exports.onTaskCreated = functions.firestore.document('tasks/{taskId}').onCreate(
     task.objectID = context.params.taskId;
 
     // Write to the algolia TASK_INDEX
-    const TASK_INDEX = client.initIndex('tasks');
+    const TASK_INDEX = client.initIndex('TASK');
     return TASK_INDEX.saveObject(task);
 });
 
