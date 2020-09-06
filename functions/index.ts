@@ -151,7 +151,7 @@ exports.addEstimateToIndex = functions.firestore.document('estimates/{estimateId
     });
 
 
-exports.updateTaskIndex = functions.firestore.document('estimates/{estimateId}')
+exports.updateEstimateIndex = functions.firestore.document('estimates/{estimateId}')
 
     .onUpdate((change) => {
         const newData = change.after.data();
